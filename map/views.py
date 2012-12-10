@@ -19,12 +19,11 @@ def get_layers():
     # Returns JSON map layer configuration
 
     layers = Layer.objects.all()
-    stats = layers.aggregate(Min('map_order'), Max('map_order'))
 
     response = []
 
     for layer in layers:
-        zindex = 20 + (stats['map_order__max'] + stats['map_order__min'] - layer.map_order) * 10
+        zindex = 20 + layer.map_order * 10
         wms_obj = dict(
             url=layer.wms_server.url, 
             layers=layer.wms_layers, 

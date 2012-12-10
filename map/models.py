@@ -38,7 +38,7 @@ class Layer(models.Model):
         ('image/jpeg', 'image/jpeg'),
     )
 
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=100)
     category = models.ForeignKey(Category)
     visible = models.BooleanField()
     category_order = models.IntegerField(default=1)
