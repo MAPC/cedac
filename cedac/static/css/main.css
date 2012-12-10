@@ -1,0 +1,59 @@
+/* Main styles
+-------------------------------------------------- */
+
+.container .credit {
+  margin: 10px 0;
+  font-size: 10px;
+}
+
+ul.accordion-inner {
+  list-style-type: none;
+  margin-left: 0px;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -40px;
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+  height: 40px;
+}
+#footer {
+  background-color: #f5f5f5;
+}
+
+/* Responsive design
+-------------------------------------------------- */
+
+/* Large desktop */
+@media (min-width: 1200px) { 
+  #map {
+    height: 500px;
+  }
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+  #footer {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

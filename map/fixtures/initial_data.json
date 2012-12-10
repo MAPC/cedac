@@ -1,0 +1,74 @@
+[
+    {
+        "pk": 1, 
+        "model": "map.category", 
+        "fields": {
+            "order": 1, 
+            "slug": "demographics", 
+            "title": "Demographics"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "map.category", 
+        "fields": {
+            "order": 2, 
+            "slug": "development", 
+            "title": "Development"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "map.category", 
+        "fields": {
+            "order": 3, 
+            "slug": "economic", 
+            "title": "Economic"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "map.category", 
+        "fields": {
+            "order": 4, 
+            "slug": "education", 
+            "title": "Education"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "map.category", 
+        "fields": {
+            "order": 5, 
+            "slug": "housing", 
+            "title": "Housing"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "map.category", 
+        "fields": {
+            "order": 6, 
+            "slug": "neighborhood-assets", 
+            "title": "Neighborhood Assets"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "map.category", 
+        "fields": {
+            "order": 7, 
+            "slug": "transportation", 
+            "title": "Transportation"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "map.wmsserver", 
+        "fields": {
+            "url": "http://geonode.mapc.org/geoserver/wms", 
+            "attribution": "<a href='http://mapc.org'>MAPC</a>", 
+            "title": "MAPC Staging (ubuntu2)"
+        }
+    }
+]

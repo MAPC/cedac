@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CEDAC Expiring Use Atlas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CEDAC Expiring Use Atlas">
+    <meta name="author" content="CEDAC">
+
+    <link href="{{ STATIC_URL }}lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}lib/leaflet/leaflet.css" />
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="{{ STATIC_URL }}lib/leaflet/leaflet.ie.css" />
+    <![endif]-->
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}lib/leaflet-plugins/markercluster/MarkerCluster.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}lib/leaflet-plugins/markercluster/MarkerCluster.Default.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" href="{{ STATIC_URL }}lib/leaflet-plugins/markercluster/MarkerCluster.Default.ie.css" /><![endif]-->
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}properties/css/style.css" />
+
+  </head>
+
+  <body>
+
+    <!-- Wrap all page content here -->
+    <div id="wrap">
+
+      <!-- Begin page content -->
+      <div class="container">
+        <div class="page-header">
+          <h1><a href="http://cedac.org" title="Community Economic Development Assistance Corporation"><img src="{{ STATIC_URL }}img/logo.png" width="176" height="80" alt="CEDAC"></a> Expiring Use Atlas</h1>
+        </div>
+
+        <div class="row">
+          <div class="span8">
+            <div id="map"></div>
+            <div>
+              <h3>The CEDAC Database</h3>
+              <p>
+                CEDAC maintains a database of over 125,000 housing units in 1,470 projects located throughout the state.  These properties are privately owned but were produced using state and/or federal housing resources.  Most funding programs required that owners commit to maintaining the properties for a particular period of time – typically 20 to 40 years. CEDAC uses this database of affordable housing projects to identify when specific projects are eligible to end affordability restrictions and convert to market rate housing.  Periodically CEDAC posts summary reports on the affordable housing stock. 
+              </p>
+              <p>For questions about the database, please contact Bill Brauner (bbrauner [at] cedac.org)</p>
+            </div>
+          </div>
+          <div class="span4">
+            <div class="accordion" id="propertieslist">
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" href="#expuseproperties">Expiring Use Properties</a>
+                </div>
+                <div id="expuseproperties" class="accordion-body">
+                  <ul class="accordion-inner">
+                    <li>Expiring Use Property</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="accordion" id="overlaylist"></div>
+            <div class="accordion" id="baselayerlist">
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle collapsed" data-toggle="collapse" href="#categoryBasemaps">
+                    Basemaps
+                  </a>
+                </div>
+                <div id="categoryBasemaps" class="accordion-body collapse">
+                  <ul class="accordion-inner"></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="push"></div>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">&copy; 2012 <a href="http://mapc.org">MAPC</a></p>
+      </div>
+    </div>
+
+    <script src="{{ STATIC_URL }}lib/jquery.js"></script>
+    <script src="{{ STATIC_URL }}lib/lodash.js"></script>
+    <script src="{{ STATIC_URL }}lib/bootstrap/js/bootstrap.js"></script>
+    <script src="{{ STATIC_URL }}lib/leaflet/leaflet-src.js"></script>
+    <script src="{{ STATIC_URL }}lib/leaflet-plugins/shramov/layer/tile/Bing.js"></script>
+    <script src="{{ STATIC_URL }}lib/leaflet-plugins/markercluster/leaflet.markercluster-src.js"></script>
+    <script src="{{ STATIC_URL }}lib/mapc-layers.js"></script>
+
+    <script src="{{ STATIC_URL }}app/main.js"></script>
+
+  </body>
+</html>
