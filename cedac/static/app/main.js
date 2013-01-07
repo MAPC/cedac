@@ -204,11 +204,16 @@ $( document ).ready(function() {
         });
 
         var markers = new L.MarkerClusterGroup({
-            disableClusteringAtZoom: 14,
+            disableClusteringAtZoom: 13,
+            iconCreateFunction: function (cluster) {
+                return new L.DivIcon({ html: '<div>' + cluster.getChildCount() + '</div>', className: 'cedac-cluster', iconSize: new L.Point(40, 40) });
+            },
+            showCoverageOnHover: false,
             polygonOptions: {
                 color: '#008C99',
                 weight: 2
-            }
+            },
+            maxClusterRadius: 110
         }).addLayer( geoJSONLayer );
 
         map.addLayer(markers);

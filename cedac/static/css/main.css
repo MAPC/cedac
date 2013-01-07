@@ -11,6 +11,10 @@ ul.accordion-inner {
   margin-left: 0px;
 }
 
+a, a:visited, a:hover {
+  color: rgba(0, 140, 153, 1);
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 
@@ -37,6 +41,24 @@ body {
 #footer {
   background-color: #f5f5f5;
 }
+
+
+/* Leaflet.markercluser overrides
+-------------------------------------------------- */
+
+.cedac-cluster {
+  color: white;
+  text-align: center;
+  background-color: rgba(0, 140, 153, 0.6);
+  background-clip: padding-box;
+  border-radius: 20px;
+}
+
+.cedac-cluster div {
+  line-height: 30px;
+  margin-top: 5px
+}
+
 
 /* Responsive design
 -------------------------------------------------- */
