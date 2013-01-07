@@ -36,6 +36,7 @@ window.cedac = window.cedac || {};
     // initialize category menu
     function initCategories ( categories ) {
         // category menu
+        // TODO: move to html template
         var html = _.template( "<div class='accordion-group'> \
             <div class='accordion-heading'> \
                 <a class='accordion-toggle collapsed' data-toggle='collapse' href='#<%= slug %>'> \
@@ -73,9 +74,11 @@ window.cedac = window.cedac || {};
             }
             var legend = legend || "";
 
+            // instantiate new Layer
             var options = _.assign( layer , { 'layer': llLayer, 'legend': legend, 'map': map });
             var maplayer = new cedac.Layer( options );
 
+            // keep track of baselayers
             if ( layer.category === "baselayerlist" ) {
                 cedac.baselayerlist.push( maplayer );
             }  
@@ -89,13 +92,14 @@ window.cedac = window.cedac || {};
     cedac.initLayers = initLayers;
     cedac.initCategories = initCategories;
 
-    // baselayers are radios
+    // baselayers are radios, only one visible at a time
     cedac.baselayerlist = [];
 
     // BaseLayer module
     // TODO: maybe extend L.Class (http://leafletjs.com/reference.html#ilayer) instead?
     cedac.Layer = (function() {
 
+        // initial
         var Layer = function( options ) {
             this.layer = options.layer;
             this.title = options.title;
@@ -106,7 +110,7 @@ window.cedac = window.cedac || {};
             this.legend = options.legend;
             this.zindex = options.zindex
 
-            // add html template to layerlist
+            // add layer to appropriate category
             if (this.category === "baselayerlist") {
                 var html = _.template( "<li><label class='radio'><input type='radio' name='baselayer' id='<%= uuid %>'> <%= title %></label></li>" );
             } else {
@@ -163,7 +167,7 @@ $( document ).ready(function() {
     $.getJSON('/appconfig', function(data) {
 
         // build category menu
-        // FIXME: deferred callback?
+        // FIXME: deferred callback for layers when categories are rendered?
         cedac.initCategories (data.categories );
 
         // add map overlay layers
@@ -183,6 +187,7 @@ $( document ).ready(function() {
             popupAnchor: new L.Point(2, -32)
         });
 
+        // TODO: move to html template file
         var popup_html = _.template( "<b><%= name %></b><br> \
             <small><%= address %></small><br> \
             Units at risk 2015: <%= atrisk2015 %>" );
