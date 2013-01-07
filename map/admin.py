@@ -9,11 +9,11 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
 
 
-
 class LayerAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'visible', 'category_order', 'map_order')
     list_display_links = ('id',)
     list_editable = ('title', 'visible', 'category_order', 'map_order')
+    list_filter = ['category', ]
 
 
 admin.site.register(Category, CategoryAdmin)
