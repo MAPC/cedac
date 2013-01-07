@@ -17,6 +17,9 @@ urlpatterns = patterns('',
 
     (r'^properties/', 'properties.views.get_properties'),
 
+    # Grappelli
+    (r'^grappelli/', include('grappelli.urls')),
+
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
