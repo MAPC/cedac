@@ -35,7 +35,7 @@ window.cedac = window.cedac || {};
 
     // initialize category menu
     function initCategories ( categories ) {
-        // category menu
+        // category menue
         // TODO: move to html template
         var html = _.template( "<div class='accordion-group'> \
             <div class='accordion-heading'> \
@@ -53,7 +53,7 @@ window.cedac = window.cedac || {};
         });
     }
 
-    // initialize basemaps
+    // initialize layers
     function initLayers( layers, map) {
         _( layers ).forEach( function( layer ) {
 
@@ -95,7 +95,7 @@ window.cedac = window.cedac || {};
     // baselayers are radios, only one visible at a time
     cedac.baselayerlist = [];
 
-    // BaseLayer module
+    // Layer module
     // TODO: maybe extend L.Class (http://leafletjs.com/reference.html#ilayer) instead?
     cedac.Layer = (function() {
 
@@ -168,13 +168,14 @@ $( document ).ready(function() {
 
         // build category menu
         // FIXME: deferred callback for layers when categories are rendered?
-        cedac.initCategories (data.categories );
+        cedac.initCategories( data.categories );
 
         // add map overlay layers
         cedac.initLayers( data.layers, map );
     });
 
 
+    // load CEDAC properties into property layer
     // TODO: cleanup to own or layer module
     $.getJSON('/properties', function(data) {
 
