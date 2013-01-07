@@ -188,10 +188,9 @@ $( document ).ready(function() {
             popupAnchor: new L.Point(2, -32)
         });
 
-        // TODO: move to html template file
-        var popup_html = _.template( "<b><%= name %></b><br> \
-            <small><%= address %></small><br> \
-            Units at risk 2015: <%= atrisk2015 %>" );
+        var popup_html = _.template(
+            $( 'script.map-popup' ).html()
+        );
 
         var geoJSONLayer = L.geoJson( data, {
             pointToLayer: function( feature, latlng ) {

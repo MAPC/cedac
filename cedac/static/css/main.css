@@ -43,7 +43,7 @@ body {
 }
 
 
-/* Leaflet.markercluser overrides
+/* Leaflet overrides
 -------------------------------------------------- */
 
 .cedac-cluster {
@@ -57,6 +57,28 @@ body {
 .cedac-cluster div {
   line-height: 30px;
   margin-top: 5px
+}
+
+.leaflet-popup-content h4 {
+  font-size: 14px;
+  color: rgba(0, 140, 153, 1);
+}
+
+.leaflet-popup-content h4 small {
+  font-size: 12px;
+  font-style: italic;
+}
+
+.leaflet-popup-content p {
+  margin: 6px 0 12px;
+}
+
+.leaflet-popup-content td:first-child {
+  font-weight: bold;
+}
+
+.leaflet-popup-content td:nth-child(2) {
+  text-align: center;
 }
 
 

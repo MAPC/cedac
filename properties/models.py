@@ -52,3 +52,7 @@ class ExpUse(models.Model):
 
     def __unicode__(self):
         return self.property_name_text
+
+    def aka_title(self):
+        if self.project_aka != None:
+            return self.project_aka.title()

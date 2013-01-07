@@ -91,6 +91,29 @@
       </div>
     </div>
 
+    <!-- lodash template definitions -->
+
+    <script type="text/template" class="map-popup">
+      <h4><%= name %><br><small><%= aka %></small></h4>
+      <p><%= address %></p>
+      <table class="table table-striped table-condensed">
+        <tr><td>0-BR units:</td><td><%= br0 %></td></tr>
+        <tr><td>1-BR units:</td><td><%= br1 %></td></tr>
+        <tr><td>2-BR units:</td><td><%= br2 %></td></tr>
+        <tr><td>3-BR units:</td><td><%= br3 %></td></tr>
+        <tr><td>4-BR units:</td><td><%= br4 %></td></tr>
+        <tr><td>5-BR units:</td><td><%= br5 %></td></tr>
+        <tr><td>Non-Elderly units:</td><td><%= nonelderly %></td></tr>
+        <tr><td>Elderly units:</td><td><%= elderly %></td></tr>
+        <tr><td>Assisted units:</td><td><%= assisted %></td></tr>
+        <tr><td>Original assisted units:</td><td><%= orig_assisted %></td></tr>
+        <tr><td>Units at risk 2015:</td><td><%= atrisk2015 %></td></tr>
+        <tr><td>Units retained 2015:</td><td><%= retained2015 %></td></tr>
+      </table>
+    </script>
+
+    <!-- libraries and dependencies -->
+    
     <script src="{{ STATIC_URL }}lib/jquery.js"></script>
     <script src="{{ STATIC_URL }}lib/lodash.js"></script>
     <script src="{{ STATIC_URL }}lib/bootstrap/js/bootstrap.js"></script>
@@ -98,6 +121,8 @@
     <script src="{{ STATIC_URL }}lib/leaflet-plugins/shramov/layer/tile/Bing.js"></script>
     <script src="{{ STATIC_URL }}lib/leaflet-plugins/markercluster/leaflet.markercluster-src.js"></script>
     <script src="{{ STATIC_URL }}lib/mapc-layers.js"></script>
+
+    <!-- main script -->
 
     <script src="{{ STATIC_URL }}app/main.js"></script>
 
