@@ -1,7 +1,7 @@
 
 #expuseproperties ul {
     margin-bottom: 0px;
-    padding-bottom: 0px;
+    padding-bottom: 20px;
 }
 
 #expuseproperties li {
@@ -9,4 +9,8 @@
     padding-left: 40px;
     padding-top: 15px;
     min-height: 40px;
+}
+
+#expuseproperties .accordion-inner {
+    border-top: none;
 }
