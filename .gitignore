@@ -2,6 +2,7 @@
 *.sublime-*
 local_settings.py
 data/*
+notes.md
 
 #################
 ## Eclipse
