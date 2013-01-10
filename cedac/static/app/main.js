@@ -70,7 +70,7 @@ window.cedac = window.cedac || {};
                     attribution: layer.wms.attribution
                 });
                 llLayer.setOpacity(0.8);
-                var legend = layer.wms.url + "?VERSION=1.1.0&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=" + layer.wms.layers;
+                var legend = layer.wms.url + "?VERSION=1.1.0&REQUEST=GetLegendGraphic&FORMAT=image/png&legend_options=fontAntiAliasing&LAYER=" + layer.wms.layers;
             }
             var legend = legend || "";
 
