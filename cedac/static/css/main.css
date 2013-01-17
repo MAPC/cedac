@@ -15,6 +15,10 @@ a, a:visited, a:hover {
   color: rgba(0, 140, 153, 1);
 }
 
+#map {
+  height: 500px;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 
