@@ -43,7 +43,12 @@
         <div class="row">
           <div class="span8">
             <div id="map" class="well"></div>
-            <div>
+            <div class="map-tools"><a class="btn btn-small" href="javascript:window.print()"><i class="icon-print"></i> Print</a></div>
+            <div class="print-legend">
+              <p><img src="{{ STATIC_URL }}properties/img/home.png" >Expiring Use Property</p>
+              <ul></ul>
+            </div>
+            <div id="about">
               <h3>The CEDAC Database</h3>
               <p>
                 CEDAC maintains a database of over 125,000 housing units in 1,470 projects located throughout the state.  These properties are privately owned but were produced using state and/or federal housing resources.  Most funding programs required that owners commit to maintaining the properties for a particular period of time – typically 20 to 40 years. CEDAC uses this database of affordable housing projects to identify when specific projects are eligible to end affordability restrictions and convert to market rate housing.  Periodically CEDAC posts summary reports on the affordable housing stock. 
@@ -51,7 +56,7 @@
               <p>For questions about the database, please contact Bill Brauner (bbrauner [at] cedac.org)</p>
             </div>
           </div>
-          <div class="span4">
+          <div class="span4 sidebar">
             <div class="accordion" id="propertieslist">
               <div class="accordion-group">
                 <div id="expuseproperties" class="accordion-body">

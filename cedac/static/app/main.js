@@ -130,9 +130,13 @@ window.cedac = window.cedac || {};
                 });
                 this.map.addLayer( this.layer);
             } else {
+                // add layer legend image in sidebar
                 this.map.addLayer( this.layer);
-                var html = _.template( "<img id='legend_<%= uuid %>' src='<%= legend %>' alt='<%= title %> - Legend'>" );
+                var html = _.template( "<img class='legend_<%= uuid %>' src='<%= legend %>' alt='<%= title %> - Legend'>" );
                 $("#" + this.uuid).parent().after( html(this) );
+                // and to print legend
+                var print_html = _.template( "<li><%= title %></br><img class='legend_<%= uuid %>' src='<%= legend %>' alt='<%= title %> - Legend'></li>" );
+                $(".print-legend ul").append( print_html(this) );
             }
             this.layer.setZIndex( this.zindex );
             $("#" + this.uuid).prop("checked", true);
@@ -141,7 +145,8 @@ window.cedac = window.cedac || {};
         Layer.prototype.hide = function() {
             if ( this.map.hasLayer( this.layer ) ) this.map.removeLayer( this.layer );
             $("#" + this.uuid).prop("checked", false);
-            $("#legend_" + this.uuid).remove();
+            $(".sidebar .legend_" + this.uuid).remove();
+            $(".print-legend .legend_" + this.uuid).parent().remove();
         }
 
         Layer.prototype.toogle = function() {

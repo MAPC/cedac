@@ -1,12 +1,20 @@
 /* Main styles
 -------------------------------------------------- */
 
+h3 {
+  clear: both;
+}
+
 .container .credit {
   margin: 10px 0;
   font-size: 12px;
 }
 
-ul.accordion-inner {
+.print-legend {
+  display: none;
+}
+
+ul.accordion-inner, .print-legend ul {
   list-style-type: none;
   margin-left: 0px;
 }
@@ -103,5 +111,25 @@ body {
     margin-right: -20px;
     padding-left: 20px;
     padding-right: 20px;
+  }
+}
+
+/* Print layout */
+@media print {
+
+  .print-legend {
+    display: block;
+  }
+  .leaflet-control-container, .sidebar, #about, .map-tools {
+    display: none;
+  }
+
+  .print-legend ul li {
+    float: left;
+    width: 33%;
+  }
+
+  .print-legend ul li:nth-child(3n) { 
+    clear : left; 
   }
 }
