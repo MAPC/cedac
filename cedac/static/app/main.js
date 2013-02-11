@@ -86,11 +86,44 @@ window.cedac = window.cedac || {};
         });
     }
 
+    // resize map (and sidebar accordingly) between 8 and 12 columns
+    var mapwidths = [ 'span8', 'span12' ];
+    function resize( mapcontainer, sidebar, oldheight ) {
+        $( mapcontainer ).removeClass( mapwidths[0] ); // oldwith
+        $( mapcontainer ).addClass( mapwidths[1] ); // newwidth
+
+        if ( mapwidths[1] === 'span12' ) { // larger map
+            var display = 'none',
+                mapheight = $(window).height() - 250 + 'px',
+                btn = {
+                    btntext : 'Smaller Map',
+                    btnicon : 'icon-resize-small'
+                };
+            // TODO: redraw basemap
+        } else {
+            var display = 'block',
+                mapheight = '500px',
+                btn = {
+                    btntext : 'Larger Map',
+                    btnicon : 'icon-resize-full'
+                };
+        }
+
+        mapwidths.reverse();
+
+        var btn_html = _.template( '<i class="<%= btnicon %>"></i> <%= btntext %>' );
+        $("#resize-btn").html( btn_html( btn ) )
+        // FIXME: map shouldn't be hardcoded
+        $( "#map" ).css( 'height', mapheight );
+        $( sidebar ).css( 'display', display );
+    }
+
 
     // expose functions
     cedac.initMap = initMap;
     cedac.initLayers = initLayers;
     cedac.initCategories = initCategories;
+    cedac.resize = resize;
 
     // baselayers are radios, only one visible at a time
     cedac.baselayerlist = [];
@@ -167,6 +200,11 @@ window.cedac = window.cedac || {};
 $( document ).ready(function() {
 
     var map = cedac.initMap( [42.35, -71.6], 9 );
+
+    $("#resize-btn").on( 'click', function( e ) {
+        var oldheight = $("#map").height();
+        cedac.resize( ".mapcontainer", ".sidebar", oldheight );
+    });
 
     // add categories and overlays
     $.getJSON('/appconfig', function(data) {

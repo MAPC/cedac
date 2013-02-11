@@ -41,9 +41,11 @@
         </div>
 
         <div class="row">
-          <div class="span8">
+          <div class="span8 mapcontainer">
             <div id="map" class="well"></div>
-            <div class="map-tools"><a class="btn btn-small" href="javascript:window.print()"><i class="icon-print"></i> Print</a></div>
+            <div class="map-tools">
+              <a class="btn btn-small" href="javascript:window.print()"><i class="icon-print"></i> Print</a>
+              <a id="resize-btn" class="btn btn-small"><i class="icon-resize-full"></i> Larger Map</a></div>
             <div class="print-legend">
               <p><img src="{{ STATIC_URL }}properties/img/home.png" >Expiring Use Property</p>
               <ul></ul>
@@ -121,7 +123,7 @@
     <script src="{{ STATIC_URL }}lib/bootstrap/js/bootstrap.js"></script>
     <script src="{{ STATIC_URL }}lib/leaflet/leaflet-src.js"></script>
     <script src="{{ STATIC_URL }}lib/leaflet-plugins/shramov/layer/tile/Bing.js"></script>
-    <script src="{{ STATIC_URL }}lib/leaflet-plugins/markercluster/leaflet.markercluster-src.js"></script>
+    <script src="{{ STATIC_URL }}lib/leaflet-plugins/markercluster/leaflet.markercluster.js"></script>
     <script src="{{ STATIC_URL }}lib/mapc-layers.js"></script>
 
     <!-- main script -->

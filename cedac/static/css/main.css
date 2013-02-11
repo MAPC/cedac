@@ -120,7 +120,7 @@ body {
   .print-legend {
     display: block;
   }
-  .leaflet-control-container, .sidebar, #about, .map-tools {
+  .leaflet-control-container, .sidebar, #about, .map-tools, #footer {
     display: none;
   }
 
