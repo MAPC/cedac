@@ -62,8 +62,7 @@ window.cedac = window.cedac || {};
             // Leaflet Layer Object or new WMS layer
             if ( _.has(layer, 'layer') ) {
                 var llLayer = layer.layer;
-            }
-            if ( _.has(layer, 'wms') ) {
+            } else if ( _.has(layer, 'wms') ) {
                 var llLayer = L.tileLayer.wms( layer.wms.url , {
                     layers: layer.wms.layers,
                     styles: layer.wms.styles,
@@ -166,29 +165,29 @@ window.cedac = window.cedac || {};
                 _( cedac.baselayerlist ).forEach( function( baselayer ) {
                    baselayer.hide();
                 });
-                this.map.addLayer( this.layer);
+                this.map.addLayer( this.layer );
             } else {
                 // add layer legend image in sidebar
                 this.map.addLayer( this.layer);
                 var html = _.template( "<img class='legend_<%= uuid %>' src='<%= legend %>' alt='<%= title %> - Legend'>" );
-                $("#" + this.uuid).parent().after( html(this) );
+                $( "#" + this.uuid ).parent().after( html( this ) );
                 // and to print legend
                 var print_html = _.template( "<li><%= title %></br><img class='legend_<%= uuid %>' src='<%= legend %>' alt='<%= title %> - Legend'></li>" );
-                $(".print-legend ul").append( print_html(this) );
+                $( ".print-legend ul" ).append( print_html( this ) );
             }
             this.layer.setZIndex( this.zindex );
-            $("#" + this.uuid).prop("checked", true);
+            $( "#" + this.uuid ).prop( "checked", true );
         }
 
         Layer.prototype.hide = function() {
             if ( this.map.hasLayer( this.layer ) ) this.map.removeLayer( this.layer );
-            $("#" + this.uuid).prop("checked", false);
-            $(".sidebar .legend_" + this.uuid).remove();
-            $(".print-legend .legend_" + this.uuid).parent().remove();
+            $( "#" + this.uuid ).prop( "checked", false );
+            $( ".sidebar .legend_" + this.uuid ).remove();
+            $( ".print-legend .legend_" + this.uuid ).parent().remove();
         }
 
         Layer.prototype.toogle = function() {
-            if ( $("#" + this.uuid).prop("checked") ) {
+            if ( $("#" + this.uuid).prop( "checked" ) ) {
                 this.show();
             } else {
                 this.hide();
@@ -220,7 +219,7 @@ $( document ).ready(function() {
     });
 
     // add categories and overlays
-    $.getJSON('/appconfig', function(data) {
+    $.getJSON('/appconfig', function( data ) {
 
         // build category menu
         // FIXME: deferred callback for layers when categories are rendered?
@@ -233,7 +232,7 @@ $( document ).ready(function() {
 
     // load CEDAC properties into property layer
     // TODO: cleanup to own or layer module
-    $.getJSON('/properties', function(data) {
+    $.getJSON('/properties', function( data ) {
 
         var icon = new L.Icon({
             iconUrl: '/static/properties/img/home.png',
@@ -254,14 +253,14 @@ $( document ).ready(function() {
                     icon: icon
                 })
             },
-            onEachFeature: function (feature, layer) {
+            onEachFeature: function ( feature, layer ) {
                 layer.bindPopup( popup_html( feature.properties ) );
             }
         });
 
         var markers = new L.MarkerClusterGroup({
             disableClusteringAtZoom: 12,
-            iconCreateFunction: function (cluster) {
+            iconCreateFunction: function ( cluster ) {
                 return new L.DivIcon({ html: '<div>' + cluster.getChildCount() + '</div>', className: 'cedac-cluster', iconSize: new L.Point(40, 40) });
             },
             showCoverageOnHover: false,
@@ -272,7 +271,7 @@ $( document ).ready(function() {
             maxClusterRadius: 110
         }).addLayer( geoJSONLayer );
 
-        map.addLayer(markers);
+        map.addLayer( markers );
 
     });
 
