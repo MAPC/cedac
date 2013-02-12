@@ -212,7 +212,11 @@ $( document ).ready(function() {
         cedac.resize( map, '.mapcontainer', '.sidebar', oldheight );
     });
     $( '#email-btn' ).on( 'click', function() {
-        $(this).attr( 'href', 'mailto:?subject=CEDAC Expiring Use Properties&body=' + document.URL );
+        $( this ).attr( 'href', 'mailto:?subject=CEDAC Expiring Use Properties&body=' + document.URL );
+    });
+    $( '#print-btn' ).on( 'click', function() {
+        $( '.print-legend p:first-child' ).text( document.URL );
+        window.print();
     });
 
     // add categories and overlays
@@ -256,7 +260,7 @@ $( document ).ready(function() {
         });
 
         var markers = new L.MarkerClusterGroup({
-            disableClusteringAtZoom: 13,
+            disableClusteringAtZoom: 12,
             iconCreateFunction: function (cluster) {
                 return new L.DivIcon({ html: '<div>' + cluster.getChildCount() + '</div>', className: 'cedac-cluster', iconSize: new L.Point(40, 40) });
             },
