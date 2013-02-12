@@ -12,7 +12,7 @@ except ImportError:
 
 class ExpUse(models.Model):
 
-    propertyid = models.IntegerField(unique=True)
+    propertyid = models.IntegerField(primary_key=True)
     hudid = models.IntegerField('HUDID', null=True, blank=True)
     property_name_text = models.CharField(max_length=50, null=True, blank=True)
     address_line1_text = models.CharField(max_length=50, null=True, blank=True)
@@ -52,4 +52,3 @@ class ExpUse(models.Model):
     def address(self):
         return '%s, %s, MA %s' % (self.address_line1_text.title(), self.city_name_text.title(), self.zip_code)
 
-        

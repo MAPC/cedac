@@ -23,7 +23,7 @@ class ExpUseAdmin(admin.OSMGeoAdmin):
     list_filter = ['city_name_text', ]
     list_display = ('propertyid', 'hudid', 'property_name_text', 'project_aka',)
     search_fields = ['property_name_text', 'project_aka']
-    ordering = ['id']
+    ordering = ['propertyid']
 
 
 admin.site.register(ExpUse, ExpUseAdmin)
