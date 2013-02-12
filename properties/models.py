@@ -18,26 +18,18 @@ class ExpUse(models.Model):
     address_line1_text = models.CharField(max_length=50, null=True, blank=True)
     city_name_text = models.CharField(max_length=20, null=True, blank=True)
     zip_code = models.CharField(max_length=5, null=True, blank=True)
-    units_nonelderly_c = models.IntegerField(null=True, blank=True)
+    # property_total_unit_count = models.IntegerField()
     units_elderly_c = models.IntegerField(null=True, blank=True)
     units_0br_c = models.IntegerField(null=True, blank=True)
     units_1br_c = models.IntegerField(null=True, blank=True)
     units_2br_c = models.IntegerField(null=True, blank=True)
     units_3br_c = models.IntegerField(null=True, blank=True)
-    units_4br_c = models.IntegerField(null=True, blank=True)
-    units_5br_c = models.IntegerField(null=True, blank=True)
+    units_4mbr_c = models.IntegerField(null=True, blank=True)
     units_assisted = models.IntegerField(null=True, blank=True)
     project_aka = models.CharField(max_length=200, null=True, blank=True)
-    isatrisk2015 = models.NullBooleanField(null=True, blank=True)
-    isatrisk2020 = models.NullBooleanField(null=True, blank=True)
-    isatrisk2025 = models.NullBooleanField(null=True, blank=True)
-    units_retained_c_2015 = models.IntegerField(null=True, blank=True)
-    units_retained_c_2020 = models.IntegerField(null=True, blank=True)
-    units_retained_c_2025 = models.IntegerField(null=True, blank=True)
-    orig_units_assisted_c = models.IntegerField(null=True, blank=True)
-    units_at_risk_num2015 = models.IntegerField(null=True, blank=True)
-    units_at_risk_num2020 = models.IntegerField(null=True, blank=True)
-    units_at_risk_num2025 = models.IntegerField(null=True, blank=True)
+    units_at_risk_num_2015 = models.IntegerField(null=True, blank=True)
+    units_at_risk_num_2020 = models.IntegerField(null=True, blank=True)
+    units_at_risk_num_2025 = models.IntegerField(null=True, blank=True)
 
     # temporary for import and geocoding
     lon = models.FloatField()
@@ -56,3 +48,8 @@ class ExpUse(models.Model):
     def aka_title(self):
         if self.project_aka != None:
             return self.project_aka.title()
+
+    def address(self):
+        return '%s, %s, MA %s' % (self.address_line1_text.title(), self.city_name_text.title(), self.zip_code)
+
+        
