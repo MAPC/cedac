@@ -30,6 +30,8 @@ window.cedac = window.cedac || {};
         ];
         this.initLayers( basemaps, map );
 
+        var hash = new L.Hash(map);
+
         return map;
     }
 
@@ -88,17 +90,18 @@ window.cedac = window.cedac || {};
 
     // resize map (and sidebar accordingly) between 8 and 12 columns
     var mapwidths = [ 'span8', 'span12' ];
-    function resize( mapcontainer, sidebar, oldheight ) {
+    function resize( map, mapcontainer, sidebar, oldheight ) {
         $( mapcontainer ).removeClass( mapwidths[0] ); // oldwith
         $( mapcontainer ).addClass( mapwidths[1] ); // newwidth
 
         if ( mapwidths[1] === 'span12' ) { // larger map
             var display = 'none',
-                mapheight = $(window).height() - 250 + 'px',
+                mapheight = $(window).height() - 250,
                 btn = {
                     btntext : 'Smaller Map',
                     btnicon : 'icon-resize-small'
                 };
+                mapheight = mapheight < 500 ? '500px' : mapheight + 'px';
             // TODO: redraw basemap
         } else {
             var display = 'block',
@@ -116,6 +119,8 @@ window.cedac = window.cedac || {};
         // FIXME: map shouldn't be hardcoded
         $( "#map" ).css( 'height', mapheight );
         $( sidebar ).css( 'display', display );
+
+        map.invalidateSize( true );
     }
 
 
@@ -201,9 +206,13 @@ $( document ).ready(function() {
 
     var map = cedac.initMap( [42.35, -71.6], 9 );
 
-    $("#resize-btn").on( 'click', function( e ) {
-        var oldheight = $("#map").height();
-        cedac.resize( ".mapcontainer", ".sidebar", oldheight );
+    // map tools
+    $( '#resize-btn' ).on( 'click', function() {
+        var oldheight = $( '#map' ).height();
+        cedac.resize( map, '.mapcontainer', '.sidebar', oldheight );
+    });
+    $( '#email-btn' ).on( 'click', function() {
+        $(this).attr( 'href', 'mailto:?subject=CEDAC Expiring Use Properties&body=' + document.URL );
     });
 
     // add categories and overlays
