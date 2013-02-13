@@ -21,7 +21,7 @@ class ExpUse(models.Model):
     address_line1_text = models.CharField(max_length=50, null=True, blank=True)
     city_name_text = models.CharField(max_length=20, null=True, blank=True)
     zip_code = models.CharField(max_length=5, null=True, blank=True)
-    # property_total_unit_count = models.IntegerField()
+    property_total_unit_count = models.IntegerField(null=True, blank=True)
     units_elderly_c = models.IntegerField(null=True, blank=True)
     units_0br_c = models.IntegerField(null=True, blank=True)
     units_1br_c = models.IntegerField(null=True, blank=True)
