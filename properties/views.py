@@ -15,8 +15,9 @@ def get_properties(request):
         geojson_prop = dict(
             name = prop.property_name_text.title(), 
             hudid = prop.hudid,
-            aka = prop.aka_title(),
-            address = prop.address(),
+            aka = prop.aka_title,
+            address = prop.address,
+            total = prop.property_total_unit_count,
             elderly = prop.units_elderly_c,
             br0 = prop.units_0br_c,
             br1 = prop.units_1br_c,
