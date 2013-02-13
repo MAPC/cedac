@@ -7,7 +7,7 @@ from models import ExpUse
 def get_properties(request):
     # Return GeoJSON for all Expiring User get_properties
 
-    expuse = ExpUse.objects.all()
+    expuse = ExpUse.objects.filter(geometry__isnull=False)
 
     features = []
     for prop in expuse:
