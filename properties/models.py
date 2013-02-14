@@ -1,8 +1,6 @@
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext as _
-from django.contrib.gis.geos import Point
 
-from pygeocoder import Geocoder
 
 
 # south introspection rules
@@ -40,7 +38,8 @@ class ExpUse(models.Model):
 
     # geocoding results
     geocoded = models.BooleanField()
-    geocoded_address = models.CharField(max_length=200, null=True)
+    geocoded_address = models.CharField(max_length=200, default='')
+    geocoded_type = models.CharField(max_length=50, default='')
 
     geometry = models.PointField(geography=True, null=True, blank=True)
     objects = models.GeoManager()
@@ -64,32 +63,26 @@ class ExpUse(models.Model):
     def save(self, *args, **kwargs):
 
         # compare new with previously saved object
-        # and decide if we need to geocode or not
+        # csvimport would overwrite existing values with nulls otherwise
         if ExpUse.objects.filter(pk=self.pk).exists():
+            
             prev_obj = ExpUse.objects.get(pk=self.pk)
-            self.geocoded = prev_obj.geocoded
-            # address changed, geocode
+
+            # address changed, mark for future geocoding
             if self.address <> prev_obj.address:
                 self.geocoded = False
-            # do not overwrite existing geometry
+                self.geometry = self.lat = self.lon = None
+                self.geocoded_address = self.geocoded_type = ''
+
+            # do not overwrite existing geometry with nulls
             if self.geometry is None:
+                self.geocoded = prev_obj.geocoded
                 self.geometry = prev_obj.geometry
+                self.lat = prev_obj.lat
+                self.lon = prev_obj.lon
                 self.geocoded_address = prev_obj.geocoded_address
+                self.geocoded_type = prev_obj.geocoded_type
 
-        print type(self.geometry)
-        print self.geocoded
-
-        # geocoding against Google if we don't have a geometry
-        if self.geocoded is False:
-            result = Geocoder.geocode(self.address)
-            if result.valid_address:
-                # reverse (lat,lon) results
-                coord = result[0].coordinates[::-1] 
-                self.geometry = Point(coord)
-                self.geocoded = True
-                self.geocoded_address = str(result)
-                print "geocoded %i" % (self.propertyid)
-
-        print "updating %i" % (self.propertyid)
+            print 'saving %i' % (self.pk)
 
         super(ExpUse, self).save(*args, **kwargs)

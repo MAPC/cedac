@@ -1,6 +1,10 @@
 import json
+import time
 
 from django.http import HttpResponse
+from django.contrib.gis.geos import Point
+
+from pygeocoder import Geocoder, GeocoderError
 from models import ExpUse
 
 
@@ -36,5 +40,42 @@ def get_properties(request):
     response = dict(type='FeatureCollection', features=features)
 
     return HttpResponse(json.dumps(response), mimetype='application/json')
+
+
+def geocode_property(obj):
+
+    if obj.geocoded is False:
+
+        attempts = 0
+        success = False
+
+        while success != True and attempts < 3:
+            try:
+                result = Geocoder.geocode(obj.address)
+                attempts += 1
+
+                if result.valid_address:
+                    obj.lat = result[0].coordinates[0]
+                    obj.lon = result[0].coordinates[1]
+                    obj.geometry = Point(obj.lon, obj.lat)
+                    obj.geocoded_address = str(result)
+                    obj.geocoded_type = result.raw[0]['geometry']['location_type']
+                    obj.geocoded = True
+
+                # no geocoding error
+                success = True
+
+            except GeocoderError, e:
+                if 'OVER_QUERY_LIMIT' in e:
+                    print 'error, attempt %i for %i' % (attempts + 1, obj.propertyid)
+                    time.sleep(2)
+                    # retry
+                    continue
+                else:
+                    # not really true, but stop trying
+                    success = True 
+                    break
+
+    return obj
 
 
