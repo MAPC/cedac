@@ -67,12 +67,12 @@ def geocode_property(obj):
 
             except GeocoderError, e:
                 if 'OVER_QUERY_LIMIT' in e:
-                    print 'error, attempt %i for %i' % (attempts + 1, obj.propertyid)
                     time.sleep(2)
                     # retry
                     continue
                 else:
                     # not really true, but stop trying
+                    # not sure what happened
                     success = True 
                     break
 
