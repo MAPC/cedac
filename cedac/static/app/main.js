@@ -94,21 +94,21 @@ window.cedac = window.cedac || {};
         $( mapcontainer ).addClass( mapwidths[1] ); // newwidth
 
         if ( mapwidths[1] === 'span12' ) { // larger map
-            var display = 'none',
-                mapheight = $(window).height() - 250,
+            var mapheight = $(window).height() - 250,
                 btn = {
                     btntext : 'Smaller Map',
                     btnicon : 'icon-resize-small'
                 };
                 mapheight = mapheight < 500 ? '500px' : mapheight + 'px';
+                $( sidebar ).addClass('hide-sidebar');
             // TODO: redraw basemap
         } else {
-            var display = 'block',
-                mapheight = '500px',
+            var mapheight = '500px',
                 btn = {
                     btntext : 'Larger Map',
                     btnicon : 'icon-resize-full'
                 };
+            $( sidebar ).removeClass('hide-sidebar');
         }
 
         mapwidths.reverse();
@@ -117,7 +117,6 @@ window.cedac = window.cedac || {};
         $("#resize-btn").html( btn_html( btn ) )
         // FIXME: map shouldn't be hardcoded
         $( "#map" ).css( 'height', mapheight );
-        $( sidebar ).css( 'display', display );
 
         map.invalidateSize( true );
     }
@@ -268,7 +267,7 @@ $( document ).ready(function() {
                 color: '#008C99',
                 weight: 2
             },
-            maxClusterRadius: 110
+            maxClusterRadius: 100
         }).addLayer( geoJSONLayer );
 
         map.addLayer( markers );

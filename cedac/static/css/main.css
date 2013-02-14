@@ -27,6 +27,10 @@ a, a:visited, a:hover {
   height: 500px;
 }
 
+.hide-sidebar {
+  display: none;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 
