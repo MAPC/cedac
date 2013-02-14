@@ -38,8 +38,8 @@ class ExpUse(models.Model):
 
     # geocoding results
     geocoded = models.BooleanField()
-    geocoded_address = models.CharField(max_length=200, default='')
-    geocoded_type = models.CharField(max_length=50, default='')
+    geocoded_address = models.CharField(max_length=200, null=True)
+    geocoded_type = models.CharField(max_length=50, null=True, blank=True)
 
     geometry = models.PointField(geography=True, null=True, blank=True)
     objects = models.GeoManager()
@@ -68,12 +68,6 @@ class ExpUse(models.Model):
             
             prev_obj = ExpUse.objects.get(pk=self.pk)
 
-            # address changed, mark for future geocoding
-            if self.address <> prev_obj.address:
-                self.geocoded = False
-                self.geometry = self.lat = self.lon = None
-                self.geocoded_address = self.geocoded_type = ''
-
             # do not overwrite existing geometry with nulls
             if self.geometry is None:
                 self.geocoded = prev_obj.geocoded
@@ -83,6 +77,9 @@ class ExpUse(models.Model):
                 self.geocoded_address = prev_obj.geocoded_address
                 self.geocoded_type = prev_obj.geocoded_type
 
-            print 'saving %i' % (self.pk)
+            # address changed, mark for future geocoding
+            if self.address != prev_obj.address:
+                self.geocoded = False
+                self.geometry = self.lat = self.lon = self.geocoded_address = self.geocoded_type = None
 
         super(ExpUse, self).save(*args, **kwargs)
