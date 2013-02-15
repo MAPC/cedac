@@ -129,7 +129,7 @@ body {
   .print-legend {
     display: block;
   }
-  .leaflet-control-container, .sidebar, #about, .map-tools, #footer {
+  .leaflet-control-container, .sidebar, #about, .map-tools, #footer, #datasources {
     display: none;
   }
 
