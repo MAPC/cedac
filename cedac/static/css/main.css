@@ -14,6 +14,10 @@ h3 {
   display: none;
 }
 
+.sidebar label {
+  display: block;
+}
+
 ul.accordion-inner, .print-legend ul {
   list-style-type: none;
   margin-left: 0px;
@@ -140,5 +144,10 @@ body {
 
   .print-legend ul li:nth-child(3n) { 
     clear : left; 
+  }
+
+  /* Bootstrap override */
+  a[href]:after {
+    content: "";
   }
 }

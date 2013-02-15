@@ -168,10 +168,10 @@ window.cedac = window.cedac || {};
             } else {
                 // add layer legend image in sidebar
                 this.map.addLayer( this.layer);
-                var html = _.template( "<img class='legend_<%= uuid %>' src='<%= legend %>' alt='<%= title %> - Legend'>" );
+                var html = _.template( "<img class='legend <%= uuid %>' src='<%= legend %>' alt='<%= title %> - Legend'>" );
                 $( "#" + this.uuid ).parent().after( html( this ) );
                 // and to print legend
-                var print_html = _.template( "<li><%= title %></br><img class='legend_<%= uuid %>' src='<%= legend %>' alt='<%= title %> - Legend'></li>" );
+                var print_html = _.template( "<li><%= title %></br><img class='<%= uuid %>' src='<%= legend %>' alt='<%= title %> - Legend'></li>" );
                 $( ".print-legend ul" ).append( print_html( this ) );
             }
             this.layer.setZIndex( this.zindex );
@@ -181,8 +181,8 @@ window.cedac = window.cedac || {};
         Layer.prototype.hide = function() {
             if ( this.map.hasLayer( this.layer ) ) this.map.removeLayer( this.layer );
             $( "#" + this.uuid ).prop( "checked", false );
-            $( ".sidebar .legend_" + this.uuid ).remove();
-            $( ".print-legend .legend_" + this.uuid ).parent().remove();
+            $( ".sidebar .legend." + this.uuid ).remove();
+            $( ".print-legend ." + this.uuid ).parent().remove();
         }
 
         Layer.prototype.toogle = function() {
