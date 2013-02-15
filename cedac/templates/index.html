@@ -101,6 +101,7 @@
     <!-- lodash template definitions -->
 
     <script type="text/template" class="map-popup">
+      {% if user.is_staff %}<a class="edit-link" href="<%= admin_url %>">edit</a>{% endif %}
       <h4><%= name %><br><small><%= aka %></small></h4>
       <p><%= address %></p>
       <table class="table table-striped table-condensed">

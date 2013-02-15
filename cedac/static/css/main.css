@@ -97,6 +97,11 @@ body {
   text-align: center;
 }
 
+.leaflet-popup-content .edit-link {
+  font-size: 11px;
+  float: right;
+}
+
 
 /* Responsive design
 -------------------------------------------------- */

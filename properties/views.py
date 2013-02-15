@@ -33,6 +33,8 @@ def get_properties(request):
             atrisk2020 = prop.units_at_risk_num_2020, 
             atrisk2025 = prop.units_at_risk_num_2025, 
         )
+        if request.user.is_staff:
+            geojson_prop['admin_url'] = prop.get_admin_url()
         geojson_geom = json.loads(prop.geometry.geojson)
         geojson_feat = dict(type='Feature', geometry=geojson_geom, properties=geojson_prop)
         features.append(geojson_feat)

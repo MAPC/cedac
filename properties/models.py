@@ -1,5 +1,7 @@
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext as _
+from django.core import urlresolvers
+from django.contrib.contenttypes.models import ContentType
 
 
 
@@ -59,6 +61,10 @@ class ExpUse(models.Model):
     @property
     def address(self):
         return '%s, %s, MA %s' % (self.address_line1_text.title(), self.city_name_text.title(), self.zip_code)
+
+    def get_admin_url(self):
+        content_type = ContentType.objects.get_for_model(self.__class__)
+        return urlresolvers.reverse("admin:%s_%s_change" % (content_type.app_label, content_type.model), args=(self.pk,))
 
     def save(self, *args, **kwargs):
 
