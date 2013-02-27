@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from django.views.generic.simple import direct_to_template
+from django.views.generic import TemplateView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 # Uncomment the next two lines to enable the admin:
@@ -10,7 +10,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'cedac.views.home', name='home'),
     # url(r'^cedac/', include('cedac.foo.urls')),
-    (r'^$', direct_to_template, {'template': 'index.html'}),
+    (r'^$', TemplateView.as_view(template_name='index.html')),
 
     # TODO: add geojson view for properties
     (r'^appconfig/', 'map.views.get_app_config'),
