@@ -1,7 +1,7 @@
-Django==1.4.3
+Django==1.5
 chardet==2.1.1
 django-csvimport==0.9
-django-grappelli==2.4.3
+django-grappelli==2.4.4
 psycopg2==2.4.6
 pygeocoder==1.1.4
 wsgiref==0.1.2
