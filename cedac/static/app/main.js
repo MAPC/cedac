@@ -71,7 +71,15 @@ window.cedac = window.cedac || {};
                     attribution: layer.wms.attribution
                 });
                 llLayer.setOpacity(0.8);
-                var legend = layer.wms.url + "?VERSION=1.1.0&REQUEST=GetLegendGraphic&FORMAT=image/png&legend_options=fontAntiAliasing&LAYER=" + layer.wms.layers;
+
+                // strip out GWC caching service from WMS url 
+                // GWC service doesn't provide legend image
+                var legendUrl = layer.wms.url;
+                var regex = /\/gwc\/service/;
+                if (legendUrl.match(regex)) {
+                    legendUrl = legendUrl.replace(regex, "");
+                }
+                var legend = legendUrl + "?VERSION=1.1.0&REQUEST=GetLegendGraphic&FORMAT=image/png&legend_options=fontAntiAliasing&LAYER=" + layer.wms.layers;
             }
             var legend = legend || "";
 
