@@ -254,14 +254,22 @@ $( document ).ready(function() {
             $( 'script.map-popup' ).html()
         );
 
+        
+        
         var onClick = function (e) {
-            feature = e.target.feature;
-            $( '#data' ).html( popup_html( feature.properties ) );
-            $( '#data' ).removeClass('green');
+            var target = e.target;
+            // var coords = new L.LatLng(target._latlng.lat, target._latlng.lng)
+            var data = $( '#data' );
+            var datalist = $( 'a#dataarea.accordion-toggle.collapsed' );
+            // var marker = L.marker(coords).addTo(map);
+            data.html( popup_html( target.feature.properties ) );
+            datalist.removeClass('green');
+            datalist.trigger('click');
+            // map.panTo(coords);
         }
 
         var onEachFeature = function (feature, layer){
-            layer.bindPopup( popup_html( feature.properties ) );
+            // layer.bindPopup( popup_html( feature.properties ) );
             layer.on({
                 click: onClick
             });
