@@ -254,15 +254,26 @@ $( document ).ready(function() {
             $( 'script.map-popup' ).html()
         );
 
+        var onClick = function (e) {
+            feature = e.target.feature;
+            $( '#data' ).html( popup_html( feature.properties ) );
+            $( '#data' ).removeClass('green');
+        }
+
+        var onEachFeature = function (feature, layer){
+            layer.bindPopup( popup_html( feature.properties ) );
+            layer.on({
+                click: onClick
+            });
+        };
+
         var geoJSONLayer = L.geoJson( data, {
             pointToLayer: function( feature, latlng ) {
                 return new L.Marker( latlng, {
                     icon: icon
                 })
             },
-            onEachFeature: function ( feature, layer ) {
-                layer.bindPopup( popup_html( feature.properties ) );
-            }
+            onEachFeature: onEachFeature
         });
 
         var markers = new L.MarkerClusterGroup({

@@ -35,6 +35,27 @@ a, a:visited, a:hover {
   display: none;
 }
 
+#data {
+  margin: 0 auto;
+  padding: 10px 15px 0;
+}
+
+#overlaylist p {
+  color: #AAA;
+  text-align: left;
+  padding-left: 8px;
+}
+
+#baselayerlist p {
+  color: #AAA;
+  text-align: left;
+  padding-left: 8px;
+}
+
+.green {
+  background-color: #BBF6B7;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 
