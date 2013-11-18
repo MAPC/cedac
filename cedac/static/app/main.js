@@ -70,7 +70,7 @@ window.cedac = window.cedac || {};
                     transparent: layer.wms.transparent,
                     attribution: layer.wms.attribution
                 });
-                llLayer.setOpacity(0.8);
+                llLayer.setOpacity(0.4);
 
                 // strip out GWC caching service from WMS url 
                 // GWC service doesn't provide legend image
