@@ -254,18 +254,28 @@ $( document ).ready(function() {
             $( 'script.map-popup' ).html()
         );
 
-        
-        
+        var the_marker = L.circleMarker([42.150956,-71.076245])
+                        .setRadius(20);
+                        // .setZIndexOffset(1000);
+
+        var moveMarker = function (target) {
+            var coords = new L.LatLng(target._latlng.lat, target._latlng.lng)
+            the_marker.setLatLng(coords);
+            the_marker.addTo(map); // only one marker, moves based on click
+        }
+
+        var updateDataList = function (target) {
+            var datalist = $( 'a#dataarea.accordion-toggle.collapsed' );
+            datalist.trigger('click');  // expands a collapsed Property Info
+            
+            $('p.green').remove();
+            $( '#data' ).html( popup_html( target.feature.properties ) );
+        }
+
         var onClick = function (e) {
             var target = e.target;
-            // var coords = new L.LatLng(target._latlng.lat, target._latlng.lng)
-            var data = $( '#data' );
-            var datalist = $( 'a#dataarea.accordion-toggle.collapsed' );
-            // var marker = L.marker(coords).addTo(map);
-            data.html( popup_html( target.feature.properties ) );
-            datalist.removeClass('green');
-            datalist.trigger('click');
-            // map.panTo(coords);
+            updateDataList(target);
+            moveMarker(target);
         }
 
         var onEachFeature = function (feature, layer){
@@ -285,7 +295,7 @@ $( document ).ready(function() {
         });
 
         var markers = new L.MarkerClusterGroup({
-            disableClusteringAtZoom: 12,
+            disableClusteringAtZoom: 10,
             iconCreateFunction: function ( cluster ) {
                 return new L.DivIcon({ html: '<div>' + cluster.getChildCount() + '</div>', className: 'cedac-cluster', iconSize: new L.Point(40, 40) });
             },
