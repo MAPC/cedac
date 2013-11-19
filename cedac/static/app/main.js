@@ -272,10 +272,75 @@ $( document ).ready(function() {
             $( '#data' ).html( popup_html( target.feature.properties ) );
         }
 
+        var summarizePointsInPolygons = function (points, polygons) {
+            console.log('points');
+            console.log(points);
+            console.log('polygons');
+            console.log(polygons);
+            _.forEach(points.features, function(point){
+                // console.log(point);
+                var layer = leafletPip.pointInLayer(point.geometry.coordinates, polygons, true);
+                // console.log(layer);
+                if (layer.length > 0){
+                    polygon = layer[0].feature;
+                    if (!polygon.properties.points) polygon.properties.points = 0;
+                    polygon.properties.points++;
+                    console.log(polygon.properties.points);
+                }
+            });
+            console.log(townLayer);
+        }
+
+
+        function zoomToFeature(e) {
+            map.fitBounds(e.target.getBounds()); }
+
+
+        function onEachFeature(feature, layer) {
+            layer.on({ click: zoomToFeature }); }
+
+        var townLayer = L.geoJson( towns, {
+            onEachFeature: onEachFeature });
+
+        var getColor = function (prop) {
+            return prop > 20 ? '#045A8D' :
+                   prop > 10 ? '#2B8CBE' :
+                   prop > 5  ? '#74A9CF' :
+                   prop > 2  ? '#BDC9E1' :
+                               '#F1EEF6'
+        }
+
+        var getOpacity = function (prop) {
+            return prop > 0 ? 0.4 : 0;
+        }
+
+        var style = function (feature) {
+            
+            var color = '#FFF'
+              , opacity = 0
+              ;
+
+            if (feature) { 
+                color   = getColor(feature.properties.points);
+                opacity = getOpacity(feature.properties.points) }
+
+            return {
+                weight: 2,
+                color: color,
+                opacity: opacity,
+                fillColor: color,
+                fillOpacity: opacity
+            }
+        }
+
+
         var onClick = function (e) {
             var target = e.target;
             updateDataList(target);
             moveMarker(target);
+            summarizePointsInPolygons(data, townLayer);
+            townLayer.setStyle(style);
+            townLayer.addTo(map);
         }
 
         var onEachFeature = function (feature, layer){
@@ -293,6 +358,7 @@ $( document ).ready(function() {
             },
             onEachFeature: onEachFeature
         });
+
 
         var markers = new L.MarkerClusterGroup({
             disableClusteringAtZoom: 10,

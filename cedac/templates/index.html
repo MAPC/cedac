@@ -36,7 +36,14 @@
       <!-- Begin page content -->
       <div class="container">
         <div class="page-header">
-          <h1><a href="http://cedac.org" title="Community Economic Development Assistance Corporation"><img src="{{ STATIC_URL }}img/logo.png" width="176" height="80" alt="CEDAC"></a> Expiring Use Atlas</h1>
+          <div class="span6">
+            <h1>
+              <a href="http://cedac.org" title="Community Economic Development Assistance Corporation">
+                <img src="{{ STATIC_URL }}img/logo.png" width="176" height="80" alt="CEDAC">
+              </a> Expiring Use Atlas
+            </h1>
+          </div>
+          <div class="span4 offset1"><br/><h4 align="right"><a href="#about">About the Atlas</a></h4></div>
         </div>
 
         <div class="row">
@@ -207,6 +214,8 @@
 
     <!-- main script -->
 
+    <script src="{{ STATIC_URL }}app/ma_towns.json"></script>
+    <script src="https://www.mapbox.com/mapbox.js/assets/leaflet-pip.js"></script>
     <script src="{{ STATIC_URL }}app/main.js"></script>
 
   </body>
