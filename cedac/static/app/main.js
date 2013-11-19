@@ -273,10 +273,10 @@ $( document ).ready(function() {
         }
 
         var summarizePointsInPolygons = function (points, polygons) {
-            console.log('points');
-            console.log(points);
-            console.log('polygons');
-            console.log(polygons);
+            // console.log('points');
+            // console.log(points);
+            // console.log('polygons');
+            // console.log(polygons);
             _.forEach(points.features, function(point){
                 // console.log(point);
                 var layer = leafletPip.pointInLayer(point.geometry.coordinates, polygons, true);
@@ -285,7 +285,7 @@ $( document ).ready(function() {
                     polygon = layer[0].feature;
                     if (!polygon.properties.points) polygon.properties.points = 0;
                     polygon.properties.points++;
-                    console.log(polygon.properties.points);
+                    // console.log(polygon.properties.points);
                 }
             });
             console.log(townLayer);
@@ -311,7 +311,7 @@ $( document ).ready(function() {
         }
 
         var getOpacity = function (prop) {
-            return prop > 0 ? 0.4 : 0;
+            return prop > 0 ? 0.6 : 0;
         }
 
         var style = function (feature) {
@@ -336,11 +336,10 @@ $( document ).ready(function() {
 
         var onClick = function (e) {
             var target = e.target;
-            updateDataList(target);
             moveMarker(target);
-            summarizePointsInPolygons(data, townLayer);
-            townLayer.setStyle(style);
-            townLayer.addTo(map);
+            updateDataList(target);
+
+            // TODO: Get this out
         }
 
         var onEachFeature = function (feature, layer){
@@ -349,6 +348,25 @@ $( document ).ready(function() {
                 click: onClick
             });
         };
+
+
+
+        // map.on('zoomend', do: compare zoom to threshhold, toggle townLayer vs markers )
+        // todo: disable clustering entirely
+        map.on('zoomend', function () {
+            zoom = map.getZoom();
+            console.log(zoom);
+            
+            if (zoom < 11 && map.hasLayer(geoJSONLayer)){
+                map.removeLayer(geoJSONLayer);
+                map.addLayer(townLayer) }
+
+            if (zoom >= 11 && map.hasLayer(townLayer)){
+                map.removeLayer(townLayer);
+                map.addLayer(geoJSONLayer) }
+        });
+
+
 
         var geoJSONLayer = L.geoJson( data, {
             pointToLayer: function( feature, latlng ) {
@@ -360,20 +378,23 @@ $( document ).ready(function() {
         });
 
 
-        var markers = new L.MarkerClusterGroup({
-            disableClusteringAtZoom: 10,
-            iconCreateFunction: function ( cluster ) {
-                return new L.DivIcon({ html: '<div>' + cluster.getChildCount() + '</div>', className: 'cedac-cluster', iconSize: new L.Point(40, 40) });
-            },
-            showCoverageOnHover: false,
-            polygonOptions: {
-                color: '#008C99',
-                weight: 2
-            },
-            maxClusterRadius: 100
-        }).addLayer( geoJSONLayer );
+        // var markers = new L.MarkerClusterGroup({
+        //     disableClusteringAtZoom: 1,
+        //     iconCreateFunction: function ( cluster ) {
+        //         return new L.DivIcon({ html: '<div>' + cluster.getChildCount() + '</div>', className: 'cedac-cluster', iconSize: new L.Point(40, 40) });
+        //     },
+        //     showCoverageOnHover: false,
+        //     polygonOptions: {
+        //         color: '#008C99',
+        //         weight: 2
+        //     },
+        //     maxClusterRadius: 100
+        // }).addLayer( geoJSONLayer );
 
-        map.addLayer( markers );
+        // map.addLayer( markers );
+        summarizePointsInPolygons(data, townLayer);
+        townLayer.setStyle(style);
+        townLayer.addTo(map);
 
     });
 
