@@ -300,7 +300,7 @@ $( document ).ready(function() {
             var num     = e.target.feature.properties.points || 0
               , content = num + ' expiring properties'
               , popup = L.popup()
-                .setLatLng( new L.LatLng( e.latlng.lat + 0.001, e.latlng.lng ) )
+                .setLatLng( new L.LatLng( e.latlng.lat + 0.005, e.latlng.lng ) )
                 .setContent(content)
                 .openOn(map); }
 
