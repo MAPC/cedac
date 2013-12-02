@@ -296,11 +296,11 @@ $( document ).ready(function() {
             map.fitBounds(e.target.getBounds()); }
 
         function hoverPopUp (e) {
-            console.log(e);
             var num     = e.target.feature.properties.points || 0
               , content = num + ' expiring properties'
+              , center  = e.layer.getBounds().getCenter()
               , popup = L.popup()
-                .setLatLng( new L.LatLng( e.latlng.lat + 0.005, e.latlng.lng ) )
+                .setLatLng(center)
                 .setContent(content)
                 .openOn(map); }
 
