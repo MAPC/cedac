@@ -392,6 +392,7 @@ $( document ).ready(function() {
         // }).addLayer( geoJSONLayer );
 
         // map.addLayer( markers );
+        L.control.scale().addTo(map);
         summarizePointsInPolygons(data, townLayer);
         townLayer.setStyle(style);
         townLayer.addTo(map);
