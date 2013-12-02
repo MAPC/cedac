@@ -292,22 +292,34 @@ $( document ).ready(function() {
         }
 
 
-        function zoomToFeature(e) {
+        function zoomToFeature (e) {
             map.fitBounds(e.target.getBounds()); }
+
+        function hoverPopUp (e) {
+            // console.log(e.target);
+            var num     = e.target.feature.properties.points || 0
+              , content = num + ' expiring properties'
+              , popup = L.popup()
+                .setLatLng(e.latlng)
+                .setContent(content)
+                .openOn(map); }
 
 
         function onEachFeature(feature, layer) {
-            layer.on({ click: zoomToFeature }); }
+            layer.on({
+                click: zoomToFeature
+              , mouseover: hoverPopUp
+            }); }
 
         var townLayer = L.geoJson( towns, {
             onEachFeature: onEachFeature });
 
         var getColor = function (prop) {
-            return prop > 20 ? '#045A8D' :
-                   prop > 10 ? '#2B8CBE' :
-                   prop > 5  ? '#74A9CF' :
-                   prop > 2  ? '#BDC9E1' :
-                               '#F1EEF6'
+            return prop > 20 ? '#016C59' :
+                   prop > 10 ? '#1C9099' :
+                   prop > 5  ? '#67A9CF' :
+                   prop > 2  ? '#A6BDDB' :
+                               '#D0D1E6'
         }
 
         var getOpacity = function (prop) {
@@ -325,9 +337,9 @@ $( document ).ready(function() {
                 opacity = getOpacity(feature.properties.points) }
 
             return {
-                weight: 2,
-                color: color,
-                opacity: opacity,
+                weight: 0.5,
+                color: '#BBB',
+                opacity: 1,
                 fillColor: color,
                 fillOpacity: opacity
             }
@@ -396,6 +408,28 @@ $( document ).ready(function() {
         summarizePointsInPolygons(data, townLayer);
         townLayer.setStyle(style);
         townLayer.addTo(map);
+
+        var legend = L.control({position: 'bottomright'});
+
+        legend.onAdd = function (map) {
+
+            var div = L.DomUtil.create('div', 'info legend'),
+                grades = [0, 2, 5, 10, 20],
+                labels = [];
+            div.innerHTML = "Expiring Properties<br/>"
+
+            // loop through our density intervals and generate a label with a colored square for each interval
+            for (var i = 0; i < grades.length; i++) {
+                div.innerHTML +=
+                    '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                    grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+            }
+
+            return div;
+        };
+
+        legend.addTo(map);
+
 
     });
 
