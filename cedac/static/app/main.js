@@ -371,11 +371,13 @@ $( document ).ready(function() {
             
             if (zoom < 11 && map.hasLayer(geoJSONLayer)){
                 map.removeLayer(geoJSONLayer);
-                map.addLayer(townLayer) }
+                map.addLayer(townLayer)
+                $('.info.legend').show() }
 
             if (zoom >= 11 && map.hasLayer(townLayer)){
                 map.removeLayer(townLayer);
-                map.addLayer(geoJSONLayer) }
+                map.addLayer(geoJSONLayer)
+                $('.info.legend').hide() }
         });
 
 

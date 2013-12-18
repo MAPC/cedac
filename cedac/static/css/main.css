@@ -31,9 +31,9 @@ a, a:visited, a:hover {
   height: 500px;
 }
 
-.hide-sidebar {
+/*.hide-sidebar {
   display: none;
-}
+}*/
 
 #data {
   margin: 0 auto;
@@ -151,7 +151,7 @@ body {
   .print-legend {
     display: block;
   }
-  .leaflet-control-container, .sidebar, #about, .map-tools, #footer, #datasources {
+  .leaflet-control-container, #about, .map-tools, #footer, #datasources {
     display: none;
   }
 
