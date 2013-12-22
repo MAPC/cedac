@@ -31,10 +31,6 @@ a, a:visited, a:hover {
   height: 500px;
 }
 
-/*.hide-sidebar {
-  display: none;
-}*/
-
 #data {
   margin: 0 auto;
   padding: 10px 15px 0;
@@ -52,6 +48,11 @@ a, a:visited, a:hover {
   width: 98%;
   position: relative;
 }
+
+
+
+
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -145,29 +146,49 @@ body {
   }
 }
 
-/* Print layout */
+/* Print layout
+-------------------------------------------------- */
+
+
 @media print {
 
-  .print-legend {
-    display: block;
+  .page-header h1 {
+    font-size: 25px;
   }
-  .leaflet-control-container, #about, .map-tools, #footer, #datasources {
+
+  .page-header img {
+    width: 100px;
+  }
+
+  #about-link {
     display: none;
   }
 
-  .print-legend ul li {
-    float: left;
-    width: 33%;
+  .print-legend {
+    display: block;
+    position: absolute;
+    top: 11%;
+    right: 27%;
+  }
+  
+  .leaflet-control-container, #overlaylist, #baselayerlist, .hide-print, .map-tools, #footer {
+    display: none;
   }
 
-  .print-legend ul li:nth-child(3n) { 
+/*  .print-legend ul li {
+    float: left;
+    width: auto;
+  }*/
+
+/*  .print-legend ul li:nth-child(3n) { 
     clear : left; 
-  }
+  }*/
 
   /* Bootstrap override */
   a[href]:after {
     content: "";
   }
+
 }
 
 
