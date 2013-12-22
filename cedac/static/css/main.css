@@ -31,9 +31,28 @@ a, a:visited, a:hover {
   height: 500px;
 }
 
-.hide-sidebar {
-  display: none;
+#data {
+  margin: 0 auto;
+  padding: 10px 15px 0;
 }
+
+.sidebar p {
+  color: #AAA;
+  text-align: left;
+  padding-left: 8px;
+}
+
+.green {
+  background-color: rgb(225, 245, 230);
+  padding: 10px 0;
+  width: 98%;
+  position: relative;
+}
+
+
+
+
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -127,27 +146,80 @@ body {
   }
 }
 
-/* Print layout */
+/* Print layout
+-------------------------------------------------- */
+
+
 @media print {
 
-  .print-legend {
-    display: block;
+  .page-header h1 {
+    font-size: 25px;
   }
-  .leaflet-control-container, .sidebar, #about, .map-tools, #footer, #datasources {
+
+  .page-header img {
+    width: 100px;
+  }
+
+  #about-link {
     display: none;
   }
 
-  .print-legend ul li {
-    float: left;
-    width: 33%;
+  .print-legend {
+    display: block;
+    position: absolute;
+    top: 11%;
+    right: 27%;
+  }
+  
+  .leaflet-control-container, #overlaylist, #baselayerlist, .hide-print, .map-tools, #footer {
+    display: none;
   }
 
-  .print-legend ul li:nth-child(3n) { 
+/*  .print-legend ul li {
+    float: left;
+    width: auto;
+  }*/
+
+/*  .print-legend ul li:nth-child(3n) { 
     clear : left; 
-  }
+  }*/
 
   /* Bootstrap override */
   a[href]:after {
     content: "";
   }
+
+}
+
+
+
+/* Map Legend 
+from Leaflet tutorial http://leafletjs.com/examples/choropleth.html
+---------------------------------------------------------------------- */
+
+.info {
+  padding: 6px 8px;
+  font: 14px/16px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255,255,255,0.8);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
+}
+
+.info h4 {
+  margin: 0 0 5px;
+  color: #777;
+}
+
+.legend {
+  line-height: 18px;
+  color: #555;
+}
+
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.7;
 }
