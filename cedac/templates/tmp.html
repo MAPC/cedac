@@ -36,19 +36,12 @@
       <!-- Begin page content -->
       <div class="container">
         <div class="page-header">
-          <div class="span6">
-            <h1>
-              <a href="http://cedac.org" title="Community Economic Development Assistance Corporation">
-                <img src="{{ STATIC_URL }}img/logo.png" width="176" height="80" alt="CEDAC">
-              </a> Expiring Use Atlas
-            </h1>
-          </div>
-          <div class="span4 offset1"><br/><h4 align="right"><a href="#about">About the Atlas</a></h4></div>
+          <h1><a href="http://cedac.org" title="Community Economic Development Assistance Corporation"><img src="{{ STATIC_URL }}img/logo.png" width="176" height="80" alt="CEDAC"></a> Expiring Use Atlas</h1>
         </div>
 
         <div class="row">
           <div class="span8 mapcontainer">
-            <div id="map" class="well">Loading...</div>
+            <div id="map" class="well"></div>
             <div class="map-tools">
               <a id="resize-btn" class="btn btn-small"><i class="icon-resize-full"></i> Larger Map</a>
               <a id="email-btn" class="btn btn-small"><i class="icon-envelope"></i> Email</a>
@@ -137,24 +130,8 @@
                 </div>
               </div>
             </div>
-
-            <div class="accordion">
-              <p class="green">Click a property on the map.</p>
-              <div class="accordion-group">
-                <div class="accordion-heading">
-                  <a class="accordion-toggle collapsed" data-toggle="collapse" href="#datalist" id="dataarea">
-                    Property Data
-                  </a>
-                </div>
-                <div id="datalist" class="accordion-body collapse">
-                  <div id="data"></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="accordion" id="overlaylist"><p>Click a category to see data layers.</p></div>
+            <div class="accordion" id="overlaylist"></div>
             <div class="accordion" id="baselayerlist">
-              <p>Click a category to see available base maps.</p>
               <div class="accordion-group">
                 <div class="accordion-heading">
                   <a class="accordion-toggle collapsed" data-toggle="collapse" href="#categoryBasemaps">
@@ -214,8 +191,6 @@
 
     <!-- main script -->
 
-    <script src="{{ STATIC_URL }}app/ma_towns.json"></script>
-    <script src="https://www.mapbox.com/mapbox.js/assets/leaflet-pip.js"></script>
     <script src="{{ STATIC_URL }}app/main.js"></script>
 
   </body>
